@@ -23,7 +23,9 @@ ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 /app/tailscale up \
     --authkey=${TAILSCALE_AUTHKEY} \
     --hostname=fly-${FLY_REGION} \
-    --advertise-exit-node #\
+    --advertise-exit-node \
+    --ssh \
+    --force-reauth
     #--advertise-tags=tag:fly-exit # requires ACL tagOwners
 
 echo "Tailscale started. Let's go!"
