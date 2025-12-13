@@ -21,7 +21,7 @@ ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
     #--socks5-server=localhost:1055
 
 /app/tailscale up \
-    --authkey=${TAILSCALE_AUTHKEY} \
+    --auth-key=${TAILSCALE_AUTHKEY} \
     --hostname=fly-${FLY_REGION} \
     --advertise-exit-node \
     --ssh \
