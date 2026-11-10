@@ -16,7 +16,7 @@ ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 /app/tailscaled \
     --verbose=1 \
     --port 41641 \
-    --state=mem: & # emphemeral-node mode (auto-remove)
+    --state=/var/lib/tailscale/tailscaled.state & # persisted on Fly volume so restarts keep the same node
     #--tun=userspace-networking
     #--socks5-server=localhost:1055
 
@@ -24,8 +24,7 @@ ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
     --auth-key=${TAILSCALE_AUTHKEY} \
     --hostname=fly-${FLY_REGION} \
     --advertise-exit-node \
-    --ssh \
-    --force-reauth
+    --ssh
     #--advertise-tags=tag:fly-exit # requires ACL tagOwners
 
 echo "Tailscale started. Let's go!"
